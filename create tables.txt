@@ -19,3 +19,6 @@ create table tvreview (uid int,tvid int,review varchar(1000), primary key (uid,t
 create table favactor (uid int,pid int,points float, primary key (uid,pid));
 
 create table actors (name varchar(20),description varchar(5000),link varchar(1000),place varchar(100),dob date,pid int auto_increment, primary key(pid));
+
+create table mcast (mid int ,pid int, primary key(mid,pid));
+create table tvcast ();

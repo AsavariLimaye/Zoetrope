@@ -104,11 +104,13 @@
                       <li><a href="#greather_than">TV Shows</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
+                <form method="POST" action="search.php">
+                    <input type="hidden" name="search_param" value="all" id="search_param">         
+                    <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
+                    <span class="input-group-btn">
+                        <input name="searchbtn" class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-search"></span>
+                    </span>
+                </form>
             </div>
         </div>
     </div>
@@ -160,7 +162,7 @@
                             exit();
                         }
                     $query = 'select * from movies where name like \''.$titleToSearch.'\';';
-                    echo $query;
+                    //echo $query;
                     $result = mysqli_query($link,$query);
                     if (!$result)
                         {
@@ -168,10 +170,30 @@
                             exit();
                         }
     $row = mysqli_fetch_array($result);
+    $mid = $row['mid'];
     $title = $row['name'];  
     $description = $row['summary'];
-    $image = $row['posterLink'];
+    $image = $row['posterlink'];
     $rating = $row['rating'];
+    $rdate = $row['rdate'];
+    $producer = $row['producer'];
+    $director = $row['director'];
+    $composer = $row['composer'];
+    $language = $row['language'];
+    $runtime = $row['runtime'];
+    $genre = $row['genre'];
+    
+    $reviewquery = 'select review from mreview where mid = '.$mid.';';
+    //echo $reviewquery;
+    $reviewresult =  mysqli_query($link,$reviewquery);
+    if (!$reviewresult)
+                        {
+                            echo "Could not connect to movies reviews";
+                            exit();
+                        }
+     $castquery = 'select actors.name from actors,mcast where mcast.pid=actors.pid and mcast.mid='.$mid.';';
+     //echo $castquery;
+     $castresult = mysqli_query($link,$castquery);
      echo" <div class=\"container\">   <!--Container for the left side list and the poster-->
         <div class=\"row\">
 
@@ -211,41 +233,55 @@
                     
                     <div class=\"tab-content\">
                         <div id=\"Reviews\" class=\"tab-pane fade in active\">
-                            <h3>Reviews</h3>
-                            <div class=\"panel panel-default\">
+                            <h3>Reviews</h3>";
+                            
+                            while ($rowrev = mysqli_fetch_array($reviewresult))
+                            {
+                                $review = $rowrev['review'];
+                                echo "<div class=\"panel panel-default\">
                                 <div class=\"panel-body\">
-                                    A stunningly original concept that will not only delight and entertain the company's massive worldwide audience, but also promises to forever change the way people think about the way people think.
+                                    $review
                                 </div>
-                            </div>
-                            <div class=\"panel panel-default\">
-                                <div class=\"panel-body\">
-                                    It’s not just a brilliant idea, but maybe the most conceptually daring movie the Bay Area animation house has ever produced. And that’s really saying something, what with WALL-E on the books.
-                                </div>
-                            </div>
+                                </div>";
+                            }
+                            
+                            
+                            echo "
                         </div>
                         
                         <div id=\"Cast\" class=\"tab-pane fade\">
-                            <h3>Cast</h3>
-                            <p> Amy Poehler, Joy </p>
-                            <p> Mindy Kaling, Disgust </p>
-                            <p> Phyllis Smith, Sadness </p>
-                        </div>
+                            <h3>Cast</h3>";
+                            
+                            while ($castrow =  mysqli_fetch_array($castresult))
+                            {
+                                $castname = $castrow['name'];
+                            echo "<p> $castname </p>";
+                            }
+                        echo "</div>
                         
                         <div id=\"Details\" class=\"tab-pane fade\">
                             <h3>Details</h3>
                             <table class=\"table\">
-                                <tbody>
-                                    <tr>
-                                        <td>Director</td>
-                                        <td>Pete Docter</td>
-                                    </tr>
+                                <tbody> 
                                     <tr>
                                         <td>Release Date</td>
-                                        <td>May 18, 2015</td>
+                                        <td>$rdate</td>
                                     </tr>
                                     <tr>
                                         <td>Running Time</td>
-                                        <td>94 minutes</td>
+                                        <td>$runtime</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Composer</td>
+                                        <td>$composer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Director</td>
+                                        <td>$director</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Producer</td>
+                                        <td>$producer</td>
                                     </tr>
                                 </tbody>
                             </table>

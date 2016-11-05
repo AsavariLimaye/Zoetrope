@@ -104,11 +104,13 @@
                       <li><a href="#greather_than">TV Shows</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
+                <form method="POST" action="search.php">
+                    <input type="hidden" name="search_param" value="all" id="search_param">         
+                    <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
+                    <span class="input-group-btn">
+                        <input name="searchbtn" class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-search"></span>
+                    </span>
+                </form>
             </div>
         </div>
     </div>
