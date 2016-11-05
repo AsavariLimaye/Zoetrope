@@ -137,13 +137,32 @@
                     <span class="glyphicon glyphicon-star-empty"></span>
                 </p>
             </div>
-            <div style="float:right" class = "col-md-3">
-                <button type="button" style="float:right" class="btn btn-default btn-success">Rate this Movie</button>
+            
+            
+            
+            <?php
+            if (isset($_SESSION['username'])){
+            echo "
+            <div style=\"float:right\" class = \"col-md-3\">
+                <button type=\"button\" style=\"float:right\" onclick=\"ratebox_show()\" class=\"btn btn-default btn-success\">Rate this Movie</button>
             </div>
-            <div style="float:right" class = "col-md-3">
-                <button type="button" style="margin-left:280px"  class="btn btn-default btn-success">Add to WishList</button>
-            </div>
-        </div>
+            <div style=\"float:right\" class = \"col-md-3\">
+                <button type=\"button\" style=\"margin-left:280px\"  class=\"btn btn-default btn-success\">Add to WishList</button>
+            </div>";
+            }
+            
+            else
+            {
+                 /*echo "
+                    <div style=\"float:right\" class = \"col-md-3\">
+                        <button type=\"button\" style=\"float:right\" diabled=\"disabled\" class=\"btn btn-default btn-success\">Rate this Movie</button>
+                    </div>
+                    <div style=\"float:right\" class = \"col-md-3\">
+                        <button type=\"button\" style=\"margin-left:280px\" diabled=\"disabled\"  class=\"btn btn-default btn-success\">Add to WishList</button>
+                    </div>";*/
+            }
+             ?>
+      </div>
     </div>
     
     <?php
