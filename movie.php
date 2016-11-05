@@ -159,7 +159,8 @@
                             echo $output; 
                             exit();
                         }
-                    $query = 'select * from movies where title like \''.$titleToSearch.'\';';
+                    $query = 'select * from movies where name like \''.$titleToSearch.'\';';
+                    echo $query;
                     $result = mysqli_query($link,$query);
                     if (!$result)
                         {
@@ -167,8 +168,8 @@
                             exit();
                         }
     $row = mysqli_fetch_array($result);
-    $title = $row['title'];  
-    $description = $row['description'];
+    $title = $row['name'];  
+    $description = $row['summary'];
     $image = $row['posterLink'];
     $rating = $row['rating'];
      echo" <div class=\"container\">   <!--Container for the left side list and the poster-->
