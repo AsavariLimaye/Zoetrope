@@ -1,0 +1,21 @@
+creating tables:
+
+
+create table Movies (mid int auto_increment, name varchar(30) not null,summary varchar(1000),posterlink varchar(100),rdate date,producer varchar(30),director varchar(30),composer varchar(30),language varchar(30),runtime int,rating float,genre varchar(20), primary key  (mid)); 
+
+
+create table TvShows (tvid int auto_increment, name varchar(30) not null,posterlink varchar(200),director varchar(20),rating float,runtime int,startdate date,genre varchar(15),seasons int,summary varchar(),primary key(tvid));
+
+
+create table users (uid int auto_increment,email varchar(30),firstname varchar(20),secondname varchar(20),password varchar(20), primary key (uid));
+
+create table movierating (uid int ,mid int, rating int, primary key (uid,mid));
+create table tvshowrating (uid int, tvid int ,rating int, primary key (uid,tvid));
+create table mwishlist(uid int, listname varchar(30),mid int, primary key (uid,mid,listname));
+
+create table tvwishlist(uid int, listname varchar(30),tvid int, primary key (uid,tvid,listname));
+create table mreview (uid int,mid int,review varchar(1000), primary key (uid,mid));
+create table tvreview (uid int,tvid int,review varchar(1000), primary key (uid,tvid));
+create table favactor (uid int,pid int,points float, primary key (uid,pid));
+
+create table actors (name varchar(20),description varchar(5000),link varchar(1000),place varchar(100),dob date,pid int auto_increment, primary key(pid));
