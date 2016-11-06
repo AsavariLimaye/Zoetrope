@@ -29,3 +29,17 @@ select language from movies group by language having count(*)>5;
 create table tvcast ();
 
 select * from movies where language='$curlanguage' order by rating desc limit 3;
+
+
+
+
+
+create temporary table genrecount(genre varchar(20),count int default 0);
+insert into genrecount (select genre,count(*) from movies,movierating where uid=$uid and movies.mid=movierating.mid group by genre);
+select @maxcount:=max(count) from genrecount;
+select * from movies where genre = (select genre from genrecount where count=@maxcount) order by rating limit 5;
+
+select genre,count(*) as c from movies,movierating where uid=1 and movies.mid=movierating.mid group by genre order by c limit 1;
+
+
+select * from movies where genre = (select genre from movies,movierating where uid=1 and movies.mid=movierating.mid and rating = (select max(d.rating) from movierating as d where uid=1)) order by rating desc limit 5;  

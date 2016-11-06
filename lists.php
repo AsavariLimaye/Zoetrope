@@ -2,6 +2,25 @@
 <html lang="en">
 
 <head>
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "Asavari2";
+$database = "zoetrope";
+
+$con = mysqli_connect($servername,$username,$password,$database);
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+//session_start();
+$result_eng =  mysqli_query($con,"select * from movies where language = 'English' order by rating desc limit 10;");
+$result_hin =  mysqli_query($con,"select * from movies where language = 'Hindi' order by rating desc limit 10;");
+$result_tel =  mysqli_query($con,"select * from movies where language = 'Telugu' order by rating desc limit 10;");
+$result_tam =  mysqli_query($con,"select * from movies where language = 'Tamil' order by rating desc limit 10;");
+$result_mal =  mysqli_query($con,"select * from movies where language = 'Malayalam' order by rating desc limit 10;");
+?>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -115,10 +134,11 @@
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a data-toggle="pill" href="#list1">Hollywood</a></li>
-                    <li><a data-toggle="pill" href="#list2">Bollywood</a></li> 
-                    <li><a data-toggle="pill" href="#list3">Comedy</a></li>
-                    <li><a data-toggle="pill" href="#list4">Romance</a></li>
+                    <li class="active"><a data-toggle="pill" href="#list1">English</a></li>
+                    <li><a data-toggle="pill" href="#list2">Hindi</a></li> 
+                    <li><a data-toggle="pill" href="#list3">Tamil</a></li>
+                    <li><a data-toggle="pill" href="#list4">Telugu</a></li>
+                    <li><a data-toggle="pill" href="#list5">Malayalam</a></li>
                 </ul>
             </div>
     
@@ -126,96 +146,118 @@
                 <div id="list1" class="tab-pane fade in active">
                     <div class = "col-md-10">
                         <ul class="list-group">
-                            <h3> Top 10 Hollywood Movies </h3>
+                            <h3> Top 10 English Movies </h3>
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td><img src="./op_1.jpg" width="50" height="70"> </td>
-                                    <td><h4>Cloudy with a Chance of Meatballs</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_2.jpg" width="50" height="70"> </td>
-                                        <td><h4>Mean Girls</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_3.jpg" width="50" height="70"> </td>
-                                        <td><h4>Harry Potter and the Chamber of Secrets</h4></td>
-                                    </tr>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result_eng))
+                                    {
+                                    $link = $row['posterlink'];
+                                    $name = $row['name'];
+                                    echo "<tr>
+                                        <td><img src=\"$link\" width=\"50\" height=\"70\"> </td>
+                                    <td><h4> $name</h4></td>
+                                    </tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </ul>
                     </div>
                 </div>
                 
-                <div id="list2" class="tab-pane fade">
+               <div id="list2" class="tab-pane fade in active">
                     <div class = "col-md-10">
                         <ul class="list-group">
-                            <h3> Top 10 Bollywood Movies </h3>
+                            <h3> Top 10 Hindi Movies </h3>
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td><img src="./op_4.jpg" width="50" height="70"> </td>
-                                    <td><h4>Cloudy with a Chance of Meatballs</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_2.jpg" width="50" height="70"> </td>
-                                        <td><h4>Andaa Apna Apna</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_5.jpg" width="50" height="70"> </td>
-                                        <td><h4>Harry Potter and the Chamber of Secrets</h4></td>
-                                    </tr>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result_hin))
+                                    {
+                                    $link = $row['posterlink'];
+                                    $name = $row['name'];
+                                    echo "<tr>
+                                        <td><img src=\"$link\" width=\"50\" height=\"70\"> </td>
+                                    <td><h4> $name</h4></td>
+                                    </tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </ul>
                     </div>
                 </div>
-                <div id="list3" class="tab-pane fade">
+                
+                <div id="list3" class="tab-pane fade in active">
                     <div class = "col-md-10">
                         <ul class="list-group">
-                            <h3> Top 10 Comedy Movies </h3>
+                            <h3> Top 10 Tamil Movies </h3>
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td><img src="./op_7.jpg" width="50" height="70"> </td>
-                                    <td><h4>Cloudy with a Chance of Meatballs</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_6.jpg" width="50" height="70"> </td>
-                                        <td><h4>Mean Girls</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_3.jpg" width="50" height="70"> </td>
-                                        <td><h4>Stuart Little</h4></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </ul>
-                    </div>    
-                </div>
-                <div id="list4" class="tab-pane fade">
-                    <div class = "col-md-10">
-                        <ul class="list-group">
-                            <h3> Top 10 Romance Movies </h3>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td><img src="./op_1.jpg" width="50" height="70"> </td>
-                                    <td><h4>Stuart Little</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_8.jpg" width="50" height="70"> </td>
-                                        <td><h4>Mean Girls</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./op_9.jpg" width="50" height="70"> </td>
-                                        <td><h4>Andaa Apna Apna</h4></td>
-                                    </tr>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result_tam))
+                                    {
+                                    $link = $row['posterlink'];
+                                    $name = $row['name'];
+                                    echo "<tr>
+                                        <td><img src=\"$link\" width=\"50\" height=\"70\"> </td>
+                                    <td><h4> $name</h4></td>
+                                    </tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </ul>
                     </div>
                 </div>
+                
+                <div id="list4" class="tab-pane fade in active">
+                    <div class = "col-md-10">
+                        <ul class="list-group">
+                            <h3> Top 10 English Telugu </h3>
+                            <table class="table">
+                                <tbody>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result_tel))
+                                    {
+                                    $link = $row['posterlink'];
+                                    $name = $row['name'];
+                                    echo "<tr>
+                                        <td><img src=\"$link\" width=\"50\" height=\"70\"> </td>
+                                    <td><h4> $name</h4></td>
+                                    </tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="list5" class="tab-pane fade in active">
+                    <div class = "col-md-10">
+                        <ul class="list-group">
+                            <h3> Top 10 Malayalam Movies </h3>
+                            <table class="table">
+                                <tbody>
+                                    <?php
+                                    while ($row = mysqli_fetch_array($result_mal))
+                                    {
+                                    $link = $row['posterlink'];
+                                    $name = $row['name'];
+                                    echo "<tr>
+                                        <td><img src=\"$link\" width=\"50\" height=\"70\"> </td>
+                                    <td><h4> $name</h4></td>
+                                    </tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+                
             </div>  
         </div>
     </div>

@@ -121,25 +121,24 @@
   </div>
 </div>
 
-<?php
-    
-    echo "<div class=\"container\">
+    <!-- Page Content -->
+    <div class="container">
 
-        <div class=\"row\">
+        <div class="row">
 
-            <div class=\"col-md-3\">
-                <p class=\"lead\">Something new to watch </p>
-                <div class=\"list-group\">
-                    <a href=\"./opening.php\" class=\"list-group-item\">Opening This Week</a>
-                    <a href=\"./now_playing.php\" class=\"list-group-item\">Now Playing</a>
-                    <a href=\"./coming_soon.php\" class=\"list-group-item\">Coming Soon</a>
+            <div class="col-md-3">
+                <p class="lead">Something new to watch </p>
+                <div class="list-group">
+                    <a href="./opening.php" class="list-group-item">Opening This Week</a>
+                    <a href="./now_playing.php" class="list-group-item">Now Playing</a>
+                    <a href="./coming_soon.php" class="list-group-item">Coming Soon</a>
                 </div>
             </div>
         
-            <div class=\"col-md-9\">
-                <div class=\"row\">";
+            <div class="col-md-9">
+                <div class="row">
                 
-                    
+                    <?php
                     $link = mysqli_connect("localhost","root","Asavari2");
                     if (!$link)
                         {
@@ -230,15 +229,14 @@
                     </div>";
                     }
                     echo "</div>";
-                    echo "
+                    ?>
                     
                     
                 </div>
             </div>
         </div>
-     </div>";
-?>
-     <!-- /.container -->
+     </div>
+    <!-- /.container -->
 
     <div class="container">
 

@@ -121,9 +121,13 @@
   </div>
 </div>
 
+    <!-- Page Content -->
+
 <?php
-    
-    echo "<div class=\"container\">
+if (!isset($_SESSION['username']))
+{
+echo"
+    <div class=\"container\">
 
         <div class=\"row\">
 
@@ -153,64 +157,26 @@
                             echo $output; 
                             exit();
                         }
-                    $uid = $_SESSION['uid'];
-                    //print $uid;
-                    
-                    $reco_query2 = "select * from movies,mcast where movies.mid=mcast.mid and mcast.pid=(select pid from favactor where uid=$uid order by points desc limit 1);";
-                    $reco_query1 = "select * from movies mo where genre = (select genre from movies as m1,movierating as m2 where m2.uid=1 and m1.mid=m2.mid and m2.rating = (select max(d.rating) from  movierating as d where d.uid=1)) order by mo.rating desc limit 5;  ";
-                    
-                    echo $reco_query1;
-                    echo $reco_query2;
-                    
-                    $result2 =  mysqli_query($link,$reco_query2);
-                    $result1 =  mysqli_query($link,$reco_query1);
-                    if (!$result1)
+                    $languages = mysqli_query($link,'select language from movies group by language having count(*)>5;');
+                    if (!$languages)
                         {
-                            echo "Error result 1";
+                            echo "Could not connect to movies to obtain languages";
                             exit();
                         }
-                    if (!$result2)
-                        {
-                            echo "Error result2";
-                            exit();
-                        }
-                        
-                    echo "<div class=\"row\">
-                        <h2> Based on favorite Genre </h2>";  
-                    while ($row = mysqli_fetch_array($result1))
+                    while ($row = mysqli_fetch_array($languages))
                     {
-                    $title = $row['name'];  
-                    $description = $row['summary'];
-                    $image = $row['posterlink'];
-                    $rating = $row['rating'];
-                    echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
-                        <div class=\"thumbnail\">
-                            <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
-                            <div class=\"caption\">
-                                <h4><a href=\"./movie.php?title=$title \">$title</a>
-                                </h4>
-                                <div class=\"ratings\">
-                                <p class=\"pull-left\">Rating : $rating/10.0</p>
-                                </br>
-                                </div> 
-                                <p class=\"pull-left\">$description</p>
-                                
-                            </div>
-                            
-                            
-                        </div>
-                    </div>";
-                    }
-                    
-                    echo "</div>
-                        <div class=\"row\">
-                        <h2> Based on favorite Actor </h2>"; 
-                    while ($row = mysqli_fetch_array($result2))
+                    $curlanguage = $row['language'];
+                    echo "<h2>$curlanguage</h2>
+                            <div class=\"row\">";
+                    $languagemoviesquery = "select * from movies where language='$curlanguage' order by rating desc limit 3;";
+                    //echo $languagemoviesquery;
+                    $languagemovies = mysqli_query($link,$languagemoviesquery);
+                    while ($langrow = mysqli_fetch_array($languagemovies))
                     {
-                    $title = $row['name'];  
-                    $description = $row['summary'];
-                    $image = $row['posterlink'];
-                    $rating = $row['rating'];
+                    $title = $langrow['name'];  
+                    $description = $langrow['summary'];
+                    $image = $langrow['posterlink'];
+                    $rating = $langrow['rating'];
                     echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
                         <div class=\"thumbnail\">
                             <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
@@ -230,16 +196,25 @@
                     </div>";
                     }
                     echo "</div>";
-                    echo "
+                    }
                     
                     
+                echo "    
                 </div>
             </div>
-        </div>
-     </div>";
-?>
-     <!-- /.container -->
+   
 
+    </div>
+    </div>";
+}
+
+//if the user is not logged in
+else
+{
+    
+}
+?>
+    
     <div class="container">
 
         <hr>
