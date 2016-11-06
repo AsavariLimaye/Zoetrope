@@ -38,8 +38,7 @@ h3{
 <body>
 
     <?php
-    session_start();
-    if ($_GET['mid']!=null && isset($_SESSION['uid']))
+    if (isset($_GET["mid"]))
     {
     $link = mysqli_connect("localhost","root","Asavari2");
                     if (!$link)
@@ -55,16 +54,7 @@ h3{
                             exit();
                         }
                         
-    $mid = $_GET['mid'];
-    $uid = $_SESSION['uid'];
-    $query = 'select * from mwishlist where uid ='.$uid.';';
-    //echo $query;
-    $result = mysqli_query($link,$query);
-    if (!$result)
-        {
-        echo "Could not connect to mwishlist";
-        exit();
-        }
+    $mid = $_GET["mid"];
     }
     
     ?>
@@ -129,51 +119,45 @@ h3{
         <div class="row">
 
             <div class="col-md-8">
-                <h3 margin="top:50px"> Add To Wishlist </h3>
+                <h3 margin="top:50px"> GUIDELINES </h3>
+                <p> Kindly do not be biased while rating the movie or reviewing it. Try to be transparent and give an honest opinion without any controversial or hyped details. Please do not  reveal important information, plot twists or story of the movie/show in any way. Your ratings and reviews are publicly visible and maybe used  by Zeotrope to recommend movies/shows to you/ other users. Also, try to write the review in English </p>
+
             </div>
         </div>
-        
-        <?php
-        echo "<form method=\"POST\" action=\"addtowishlistutil.php?uid=$uid&mid=$mid\">"; 
-        ?>
-            <div class="form-group">
-            
-            <div class = "row">
-                    <input type="text" class="form-control" name="wishlist" placeholder="List Name" />         
-            </div>
-            
-            <div class="row">
-                <div style="float:left" class = "col-md-3">
-                    <input type="submit" name="submit" style="margin-left:10px"  class="btn btn-default btn-success" />
-                </div>
-            </div>
-
-            </div>
-        </form>
-        
-        
-        <div class = "col-md-10">
-                        <ul class="list-group">
-                            <h3> Your Current Wishlists </h3>
-                            <table class="table">
-                                <tbody>
-                                <?php
-                                while($row = mysqli_fetch_array($result))
-                                {
-                                $listname =   $row['listname'];                                 
-                                echo "<tr>
-                                    <td><h4>$listname</td>
-                                    </tr>";
-                                }
-                                ?>
-                                </tbody>
-                            </table>
-                        </ul>
-                    </div>
-        
     </div>
 
-             
+    <div class="container">
+    <div class="form-group">
+   
+    <?php
+    echo "<form action=\"addratereview.php?mid=$mid\" method=\"POST\">";
+    ?>
+    <div class="row">
+    <div class="col-md-3">
+    
+            <label for="sel1">Select rating for the movie:</label>
+                <input type="text" class="form-control" name="rating" placeholder="Rating" />         
+    </div>
+    </div>
+            
+    <div class="row">
+    <div class="col-md-8">
+                <label for="comment">Justify your rating by writing a review here : </label>
+                <textarea class="form-control" rows="5" id="comment" name="review"></textarea>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div style="float:left" class = "col-md-3">
+        <button type="button" style="margin-left:10px" class="btn btn-danger ">Cancel</button>
+        <input type="submit" name="submit" style="margin-left:10px"  class="btn btn-default btn-success" />
+    </div>
+    </div>
+    
+    </form>
+    
+    </div>
+    </div>          
 
         
 
