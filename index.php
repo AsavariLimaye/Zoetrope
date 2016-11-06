@@ -26,8 +26,8 @@
 
 <style>
 .row{
-  margin-top: 20px;
-  margin-bottom: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 </style>
 </head>
@@ -94,10 +94,10 @@
 
     <div class="container">
     <div class="row">    
-
-        <div class="col-md-8 col-xs-offset-3">
-            <div class="input-group">
-                <div  class="input-group-btn search-panel">
+            <div class="col-lg-8 col-xs-offset-3">
+            
+                <div  class="input-group-btn input-group-lg search-panel">
+                     <?php echo "<form class=\"form-inline\" method=\"POST\" action=\"search.php?type=$type\">"; ?>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <?php 
                         
@@ -109,15 +109,15 @@
                       <li><a href="./index.php?type=movies">Movies</a></li>
                       <li><a href="./index.php?type=tvshows">TV Shows</a></li>
                     </ul>
-                </div>
-                <?php echo "<form method=\"POST\" action=\"search.php?type=$type\">"; ?>
+                
+                    
                     <input type="hidden" name="search_param" value="all" id="search_param">         
                     <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                    <span class="input-group-btn">
-                        <input name="searchbtn" class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-search"></span>
-                    </span>
+                    <input name="searchbtn" class="btn btn-default" type="submit"/>
+                     
                 </form>
-            </div>
+                   </div>
+           
         </div>
     </div>
 </div>
@@ -177,7 +177,7 @@
                 
                 <div class="col-md-9 col-md-offset-3">
                 <div class="row">
-                
+                <h2> Latest Movies </h2>
                     <?php
                     $link = mysqli_connect("localhost","root","Asavari2");
                     if (!$link)
@@ -192,12 +192,21 @@
                             echo $output; 
                             exit();
                         }
-                    $result = mysqli_query($link,'select * from movies order by rdate desc limit 9;');
+                    $result = mysqli_query($link,'select * from movies order by rdate desc limit 3;');
+                    $result2 = mysqli_query($link,'select * from movies order by rating desc limit 3');
                     if (!$result)
                         {
                             echo "Could not connect to movies";
                             exit();
                         }
+                    if (!$result2)
+                        {
+                            echo "Could not connect to movies";
+                            exit();
+                        }    
+                        
+                        
+                    
                     while ($row = mysqli_fetch_array($result))
                     {
                     $title = $row['name'];  
@@ -222,6 +231,34 @@
                         </div>
                     </div>";
                     }
+                    echo "</div>  
+                            <div> 
+                            <h2> Highest Rated Movies </h2>";
+                     while ($row = mysqli_fetch_array($result2))
+                    {
+                    $title = $row['name'];  
+                    $description = $row['summary'];
+                    $image = $row['posterlink'];
+                    $rating = $row['rating'];
+                    echo "<div class=\"col-sm-4 col-lg-4 col-md-4 \">";
+                        echo "<div class=\"thumbnail\">
+                            <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
+                            <div class=\"caption\">
+                                <h4><a href=\"./movie.php?title=$title \">$title</a>
+                                </h4>
+                                <div class=\"ratings\">
+                                <p class=\"pull-left\">Rating : $rating/10.0</p>
+                                </br>
+                                </div> 
+                                <p class=\"pull-left\">$description</p>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>";
+                    }
+                    
                     ?>
                 
                 
