@@ -197,7 +197,7 @@
                 <input type=\"button\" style=\"float:right\" onclick=\"location.href='http://localhost/ratereview?mid=$mid';\" class=\"btn btn-default btn-success\" value=\"Rate this Movie\" />
             </div>
             <div style=\"float:right\" class = \"col-md-3\">
-                <button type=\"button\" style=\"margin-left:280px\"  class=\"btn btn-default btn-success\">Add to WishList</button>
+                <button type=\"button\" style=\"margin-left:280px\"  onclick=\"location.href='http://localhost/addtowishlist?mid=$mid';\" class=\"btn btn-default btn-success\">Add to WishList</button>
             </div>";
             }
             
