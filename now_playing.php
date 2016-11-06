@@ -353,36 +353,43 @@
                   </tr>
               </thead>   
               <tbody>
-                <tr>
-                    <td>Pink</td>
-                    <td>Hindi</td>
-                    <td>Drama, Thriller</td>
-                    <td>3 / 5</td>                                       
-                </tr>
-                <tr>
-                    <td>Sully</td>
-                    <td>English</td>
-                    <td>Drama, Crime, Thriller</td>
-                    <td>2.5 / 5</td>                                       
-                </tr>
-                <tr>
-                    <td>Parched</td>
-                    <td>Hindi</td>
-                    <td>Drama</td>
-                    <td>2 / 5</td>                                        
-                </tr>
-                <tr>
-                    <td class="hideOverflow">Mungaru Male 2 </td>
-                    <td>Kannada</td>
-                    <td>Romance, Drama</td>
-                    <td>1 / 5</td>                                       
-                </tr>
-                <tr>
-                    <td>Oppam</td>
-                    <td>Malayalam</td>
-                    <td>Crime, Drama, Thriller</td>
-                    <td>3.5 / 5</td>                                        
-                </tr>                                   
+               <?php
+               $link = mysqli_connect("localhost","root","Asavari2");
+                    if (!$link)
+                        {
+                            $output = 'Unable to connect to the data base server.';
+                            echo $output;
+                            exit();
+                        }
+                    if (!mysqli_select_db($link, 'zoetrope')) 
+                        {
+                            $output = 'Unable to locate the zoetrope database.'; 
+                            echo $output; 
+                            exit();
+                        }
+                    $query = 'select * from movies where rdate between date_sub(curdate(),interval 60 day) and curdate();';
+                    //echo $query;
+                    $result = mysqli_query($link,$query);
+                if (!$result)
+                        {
+                            echo "Could not connect to movies";
+                            exit();
+                        }
+                 while ($row = mysqli_fetch_array($result))
+                    {
+                    $name = $row['name'];
+                    $language = $row['language'];
+                    $genre = $row['genre'];
+                    $rating = $row['rating'];
+                    
+                    echo "<tr>
+                        <td>$name</td>
+                        <td>$language</td>
+                        <td>$genre</td>
+                        <td>$rating/10</td>                                        
+                        </tr>";
+                    }
+                ?>
               </tbody>
             </table>
             </div>

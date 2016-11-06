@@ -29,6 +29,38 @@
 </head>
 
 <body>
+<?php
+$link = mysqli_connect("localhost","root","Asavari2");
+    if (!$link)
+        {
+        $output = 'Unable to connect to the data base server.';
+         echo $output;
+        exit();
+        }
+    if (!mysqli_select_db($link, 'zoetrope')) 
+        {
+        $output = 'Unable to locate the zoetrope database.'; 
+         echo $output; 
+         exit();
+        }
+         $query = 'select * from movies where rdate between  curdate() and date_add(curdate(),interval 7 day) limit 6;';
+         //echo $query;
+         $result = mysqli_query($link,$query);
+         if (!$result)
+            {
+            echo "Could not connect to movies";
+            exit();
+            }
+        $query1 = 'select * from tvshows where startdate between curdate() and date_add(curdate(),interval 7 day) limit 6;';
+        //echo $query;
+        $result1 = mysqli_query($link,$query1);
+        if (!$result1)
+            {
+            echo "Could not connect to tvshows";
+            exit();
+            }
+    
+    ?>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -128,42 +160,22 @@
 <div class="container-fluid">
 <div class = "row">
    
-  
-   <div class = "col-md-2 " >
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px; "src = "./op_1.jpg" alt = "Generic placeholder thumbnail">
+<?php  
+while ($row = mysqli_fetch_array($result))
+{
+ $name = $row['name'];
+ $language = $row['language'];
+ $rating = $row['rating'];
+  $posterlink = $row['posterlink'];
+  echo "<div class = \"col-md-12\" >
+      <a href = \"#\" class = \"thumbnail\">
+         <img style=\"margin-left:10px;margin-right:5px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
-      <p style="max-width:200px">ALL THE FEELS (U/A) <br/>  English</br> Estimated Rating : 4/5 <p>
+      <p style=\"max-width:10px\">$name<br/>$language</br> Estimated Rating : $rating/10 <p>
       
-   </div>
-   
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_2.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">BFG (U/A)</br>English</br>Estimated Rating : 3/5 </p>
-   </div>
-
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_5.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Manam (U/A)</br>Telgu</br>Estimated Rating : 2/5 </p>
-    </div>  
-
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_3.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Raees (A)</br>Hindi</br>Estimated Rating : 2.5/5</br>
-   </div>
-   
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_4.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Talaiva (U/A)</br>Tamil</br>Estimated Rating : 4/5</p>
-   </div>
+   </div>";
+}
+ ?>
    
 </div>
 </div>
@@ -173,42 +185,21 @@
 <div class="container-fluid">
 <div class = "row">
    
-  
-   <div class = "col-md-2 col-md-offset-2" >
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px; "src = "./op_6.jpg" alt = "Generic placeholder thumbnail">
+ <?php  
+while ($row = mysqli_fetch_array($result1))
+{
+ $name = $row['name'];
+ $genre = $row['genre'];
+ $seasons = $row['seasons'];
+ $posterlink = $row['posterlink'];
+ echo " <div class = \"col-md-2 col-md-offset-2\" >
+      <a href = \"#\" class = \"thumbnail\">
+         <img style=\"max-height:210px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
-      <p style="max-width:200px">Sherlock</br>Season 4</br>Episode 3</p>
-   </div>
-
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_7.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Bones</br>Season 10</br>Episode 2</p>
-   </div>
-
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_8.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Suits</br>Season 4</br>Episode 5</p>
-    </div>  
-
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_9.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Castle</br>Season 7</br>Episode 7</p>
-   </div>
-   
-   <div class = "col-md-2">
-      <a href = "#" class = "thumbnail">
-         <img style="max-height:210px;" src = "./op_10.jpg" alt = "Generic placeholder thumbnail">
-      </a>
-      <p style="max-width:200px">Narcos</br>Season 2</br>Episode 9</p>
-   </div>
-   
+      <p style=\"max-width:200px\">$name</br>Seasons:$seasons</br>$genre</p>
+   </div> ";
+}
+ ?> 
 </div>
 </div>
 

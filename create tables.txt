@@ -22,4 +22,10 @@ create table favactor (uid int,pid int,points float default 0, primary key (uid,
 create table actors (name varchar(20),description varchar(5000),link varchar(1000),place varchar(100),dob date,pid int auto_increment, primary key(pid));
 
 create table mcast (mid int ,pid int, primary key(mid,pid));
+create table tvcast (tvid int ,pid int, primary key(mid,pid));
+
+
+select language from movies group by language having count(*)>5;
 create table tvcast ();
+
+select * from movies where language='$curlanguage' order by rating desc limit 3;

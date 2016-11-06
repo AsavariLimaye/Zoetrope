@@ -152,18 +152,26 @@
                             echo $output; 
                             exit();
                         }
-                    $result = mysqli_query($link,'select * from movies where language like \'english\';');
-                    if (!$result)
+                    $languages = mysqli_query($link,'select language from movies group by language having count(*)>5;');
+                    if (!$languages)
                         {
-                            echo "Could not connect to movies";
+                            echo "Could not connect to movies to obtain languages";
                             exit();
                         }
-                    while ($row = mysqli_fetch_array($result))
+                    while ($row = mysqli_fetch_array($languages))
                     {
-                    $title = $row['title'];  
-                    $description = $row['description'];
-                    $image = $row['posterLink'];
-                    $rating = $row['rating'];
+                    $curlanguage = $row['language'];
+                    echo "<h2>$curlanguage</h2>
+                            <div class=\"row\">";
+                    $languagemoviesquery = "select * from movies where language='$curlanguage' order by rating desc limit 3;";
+                    //echo $languagemoviesquery;
+                    $languagemovies = mysqli_query($link,$languagemoviesquery);
+                    while ($langrow = mysqli_fetch_array($languagemovies))
+                    {
+                    $title = $langrow['name'];  
+                    $description = $langrow['summary'];
+                    $image = $langrow['posterlink'];
+                    $rating = $langrow['rating'];
                     echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
                         <div class=\"thumbnail\">
                             <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
@@ -182,28 +190,11 @@
                         </div>
                     </div>";
                     }
+                    echo "</div>";
+                    }
                     ?>
                     
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./images/tv5.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="./tvshow.php">Supernatural</a>
-                                </h4>
-                                <p>A girl commits a crime to protect herself and a retired lawyer comes in to prove her innocent.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
     <!-- /.container -->

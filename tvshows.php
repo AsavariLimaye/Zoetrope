@@ -150,17 +150,17 @@
                             echo $output; 
                             exit();
                         }
-                    $result = mysqli_query($link,'select * from movies where language like \'english\';');
+                    $result = mysqli_query($link,'select * from tvshows order by rating desc limit 20;');
                     if (!$result)
                         {
-                            echo "Could not connect to movies";
+                            echo "Could not connect to tvshows";
                             exit();
                         }
                     while ($row = mysqli_fetch_array($result))
                     {
-                    $title = $row['title'];  
-                    $description = $row['description'];
-                    $image = $row['posterLink'];
+                    $title = $row['name'];  
+                    $description = $row['summary'];
+                    $image = $row['posterlink'];
                     $rating = $row['rating'];
                     echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
                         <div class=\"thumbnail\">
