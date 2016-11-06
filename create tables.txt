@@ -16,7 +16,8 @@ create table mwishlist(uid int, listname varchar(30),mid int, primary key (uid,m
 create table tvwishlist(uid int, listname varchar(30),tvid int, primary key (uid,tvid,listname));
 create table mreview (uid int,mid int,review varchar(1000), primary key (uid,mid));
 create table tvreview (uid int,tvid int,review varchar(1000), primary key (uid,tvid));
-create table favactor (uid int,pid int,points float, primary key (uid,pid));
+
+create table favactor (uid int,pid int,points float default 0, primary key (uid,pid));
 
 create table actors (name varchar(20),description varchar(5000),link varchar(1000),place varchar(100),dob date,pid int auto_increment, primary key(pid));
 

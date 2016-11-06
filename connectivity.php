@@ -18,13 +18,13 @@ if (isset($_POST['submit']))
 session_start();
 if (!empty($_POST['username']))
     {
-        echo "select * from users where email = '$_POST[username]' AND secondname = '$_POST[password]';";
-        $result =  mysqli_query($con,"select * from users where email = '$_POST[username]' AND secondname = '$_POST[password]';");
+        echo "select * from users where email = '$_POST[username]' AND password = '$_POST[password]';";
+        $result =  mysqli_query($con,"select * from users where email = '$_POST[username]' AND password = '$_POST[password]';");
         echo $_POST['username'];
         echo $_POST['password'];
        $row = mysqli_fetch_array($result);
        
-        if (!empty($row['email']) AND !empty($row['secondname']))
+        if (!empty($row['email']) AND !empty($row['password']))
         {
             $_SESSION['username'] = $row['email'];
             $_SESSION['uid']= $row['uid'];

@@ -26,7 +26,7 @@
 
 <style>
 .row{
-  margin-top: 0px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 </style>
@@ -83,6 +83,7 @@
                     </li>
                  </ul>" ;
                 }
+                $type = $_GET['type'];
                 ?>
                  
                 
@@ -98,15 +99,18 @@
             <div class="input-group">
                 <div  class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
+                        <?php 
+                        
+                        echo "<span id=\"search_concept\">$type</span> <span class=\"caret\"></span>";
+                        ?>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#contains">All</a></li>
-                      <li><a href="#its_equal">Movies</a></li>
-                      <li><a href="#greather_than">TV Shows</a></li>
+                      <li><a href="./index.php?type=all">All</a></li>
+                      <li><a href="./index.php?type=movies">Movies</a></li>
+                      <li><a href="./index.php?type=tvshows">TV Shows</a></li>
                     </ul>
                 </div>
-                <form method="POST" action="search.php">
+                <?php echo "<form method=\"POST\" action=\"search.php?type=$type\">"; ?>
                     <input type="hidden" name="search_param" value="all" id="search_param">         
                     <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
                     <span class="input-group-btn">
@@ -156,7 +160,7 @@
                                     <img class="slide-image" style="max-height:300px;max-width:900px;" src="./home_2.jpg" alt=>
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" style="max-height:300px;max-width:900px;" src="./home_3.jpg" alt=>
+                                    <img class="slide-image" style="max-height:300px;max-width:900px;" src="./tv9.jpg" alt=>
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -169,140 +173,58 @@
                     </div>
 
                 </div>
-
-                <div class="row">
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./np_1.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">Pink</a>
-                                </h4>
-                                <p>A girl commits a crime to protect herself and a retired lawyer comes in to prove her innocent.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./np_3.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">Oppam</a>
-                                </h4>
-                                <p>A blind man is accused of false murder charges and he has to prove his inocence with his sense.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">12 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./np_4.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">Mungaru Male 2</a>
-                                </h4>
-                                <p>A sequel to the first love story, only this one's better</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">31 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-empty"></span>
-                                    <span class="glyphicon glyphicon-empty"></span>
-                                    <span class="glyphicon glyphicon-emppty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./op_2.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">BFG</a>
-                                </h4>
-                                <p>Disney's latest adaption of Snow White and the 7 dwarfs.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">6 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./op_3.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">Raes</a>
-                                </h4>
-                                <p>Shar Rukh Khan plays the role of a diplomat against corruption.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <!--<h4><a href="#">Like this template?</a>
-                        </h4>
-                        <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                        <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a> -->
-                        <div class="thumbnail">
-                            <img style="max-height:120px" src="./op_5.jpg" alt="">
-                            <div class="caption">
-                                <h4><a href="#">Talaiva</a>
-                                </h4>
-                                <p>This Tamil Blockbuster Love story is a must watch, atleast for it's dialogues.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                    </div>
-
-                </div>
-
             </div>
+                
+                <div class="col-md-9 col-md-offset-3">
+                <div class="row">
+                
+                    <?php
+                    $link = mysqli_connect("localhost","root","Asavari2");
+                    if (!$link)
+                        {
+                            $output = 'Unable to connect to the data base server.';
+                            echo $output;
+                            exit();
+                        }
+                    if (!mysqli_select_db($link, 'zoetrope')) 
+                        {
+                            $output = 'Unable to locate the zoetrope database.'; 
+                            echo $output; 
+                            exit();
+                        }
+                    $result = mysqli_query($link,'select * from movies order by rdate desc limit 9;');
+                    if (!$result)
+                        {
+                            echo "Could not connect to movies";
+                            exit();
+                        }
+                    while ($row = mysqli_fetch_array($result))
+                    {
+                    $title = $row['name'];  
+                    $description = $row['summary'];
+                    $image = $row['posterlink'];
+                    $rating = $row['rating'];
+                    echo "<div class=\"col-sm-4 col-lg-4 col-md-4 \">";
+                        echo "<div class=\"thumbnail\">
+                            <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
+                            <div class=\"caption\">
+                                <h4><a href=\"./movie.php?title=$title \">$title</a>
+                                </h4>
+                                <div class=\"ratings\">
+                                <p class=\"pull-left\">Rating : $rating/10.0</p>
+                                </br>
+                                </div> 
+                                <p class=\"pull-left\">$description</p>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>";
+                    }
+                    ?>
+                
+                
 
         </div>
 

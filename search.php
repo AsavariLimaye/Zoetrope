@@ -23,15 +23,24 @@ if (isset($_POST['searchbtn']))
                         }
     $tablename = 'movies';
     $searchterm = $_POST['x'];
+    $type = $_GET['type'];
     echo $searchterm;
-    $query = "select * from movies where name = '$searchterm';";
-    echo $query;
-    $result = mysqli_query($con,"select * from movies where name like '%$searchterm%';");
+    $query = "select * from movies where name like '%$searchterm%';";
+    $query1 = "select * from tvshows where name like '%$searchterm%';";
+    $result = mysqli_query($con,$query);
+    $result1 = mysqli_query($con,$query1);
     if (!$result)
         {
-         echo "Could not connect to $tablename";
+         echo "Could not connect to movies";
          exit();
          }
+    if (!$result1)
+        {
+         echo "Could not connect to tvshows";
+         exit();
+         }
+    if ($type != 'tvshows')
+    {
     while ($row = mysqli_fetch_array($result))
         {
         $title = $row['name'];  
@@ -56,6 +65,36 @@ if (isset($_POST['searchbtn']))
                         </div>
                     </div>";
         }
+    }
+        else if ($type = 'movies')
+        {
+         while ($row = mysqli_fetch_array($result1))
+        {
+        $title = $row['name'];  
+        $description = $row['summary'];
+        $image = $row['posterlink'];
+        $rating = $row['rating'];
+        echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
+                        <div class=\"thumbnail\">
+                            <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
+                            <div class=\"caption\">
+                                <h4><a href=\"./movie.php?title=$title \">$title</a>
+                                </h4>
+                                <div class=\"ratings\">
+                                <p class=\"pull-left\">Rating : $rating/10.0</p>
+                                </br>
+                                </div> 
+                                <p class=\"pull-left\">$description</p>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>";
+        }
+        }
+        
+        
 }
     
  ?>

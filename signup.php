@@ -156,17 +156,17 @@ form.login a:hover
             <div class="wrap">
                 <p class="form-title">
                     Welcome to Zoetrope</p>
-                <form class="login">
+                <form class="login" action="makeacct.php" method="POST">
               <!--  <input type="text" placeholder="Username" />
                 <input type="password" placeholder="Password" />
                 <input type="submit" value="Log In" class="btn btn-success btn-sm" />
                -->
-               <input type="text" placeholder="First Name">
-               <input type="text" placeholder="Last Name">
-               <input type="text" placeholder="Username">
-               <input type="password" placeholder="Choose Password">
-               <input type="password" placeholder="Re-enter Password">
-               <input type="submit" value="Create Account" class="btn btn-success btn-sm">
+               <input type="text" placeholder="First Name" name="fname">
+               <input type="text" placeholder="Last Name" name="lname">
+               <input type="text" placeholder="Email" name="email">
+               <input type="password" placeholder="Choose Password" name="password">
+               <input type="password" placeholder="Re-enter Password" name="password2">
+               <input type="submit" value="Create Account" class="btn btn-success btn-sm" name="submit">
                 </div>
                 </form>
             </div>
