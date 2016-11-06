@@ -49,8 +49,8 @@
                             echo $output; 
                             exit();
                         }
-                    $query = 'select * from tvshows where name like \''.$titleToSearch.'\';';
-                    //echo $query;
+                    $query = 'select * from tvshows where name like \'%'.$titleToSearch.'%\';';
+                    echo $query;
                     $result = mysqli_query($link,$query);
                     if (!$result)
                         {
@@ -70,7 +70,7 @@
     $genre = $row['genre'];
     
     $reviewquery = 'select review from tvreview where tvid = '.$tvid.';';
-    //echo $reviewquery;
+    echo $reviewquery;
     $reviewresult =  mysqli_query($link,$reviewquery);
     if (!$reviewresult)
                         {

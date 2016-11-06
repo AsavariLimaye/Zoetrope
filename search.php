@@ -41,6 +41,7 @@ if (isset($_POST['searchbtn']))
          }
     if ($type != 'tvshows')
     {
+        //echo "all or movie";
     while ($row = mysqli_fetch_array($result))
         {
         $title = $row['name'];  
@@ -66,8 +67,9 @@ if (isset($_POST['searchbtn']))
                     </div>";
         }
     }
-        else if ($type = 'movies')
+        if ($type != 'movies')
         {
+            //echo "all or tvshow";
          while ($row = mysqli_fetch_array($result1))
         {
         $title = $row['name'];  
@@ -78,7 +80,7 @@ if (isset($_POST['searchbtn']))
                         <div class=\"thumbnail\">
                             <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
                             <div class=\"caption\">
-                                <h4><a href=\"./movie.php?title=$title \">$title</a>
+                                <h4><a href=\"./tvshow.php?title=$title \">$title</a>
                                 </h4>
                                 <div class=\"ratings\">
                                 <p class=\"pull-left\">Rating : $rating/10.0</p>

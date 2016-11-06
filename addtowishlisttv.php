@@ -57,12 +57,12 @@ h3{
                         
     $tvid = $_GET['tvid'];
     $uid = $_SESSION['uid'];
-    $query = 'select * from mwishlist where uid ='.$uid.';';
+    $query = 'select * from tvwishlist where uid ='.$uid.';';
     //echo $query;
     $result = mysqli_query($link,$query);
     if (!$result)
         {
-        echo "Could not connect to mwishlist";
+        echo "Could not connect to tvwishlist";
         exit();
         }
     }
@@ -134,7 +134,7 @@ h3{
         </div>
         
         <?php
-        echo "<form method=\"POST\" action=\"addtowishlistutil.php?uid=$uid&tvid=$tvid\">"; 
+        echo "<form method=\"POST\" action=\"addtowishlistutiltv.php?uid=$uid&tvid=$tvid\">"; 
         ?>
             <div class="form-group">
             

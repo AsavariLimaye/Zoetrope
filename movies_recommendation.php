@@ -122,28 +122,23 @@
 </div>
 
     <!-- Page Content -->
+    <div class="container">
 
-<?php
-if (!isset($_SESSION['username']))
-{
-echo"
-    <div class=\"container\">
+        <div class="row">
 
-        <div class=\"row\">
-
-            <div class=\"col-md-3\">
-                <p class=\"lead\">Something new to watch </p>
-                <div class=\"list-group\">
-                    <a href=\"./opening.php\" class=\"list-group-item\">Opening This Week</a>
-                    <a href=\"./now_playing.php\" class=\"list-group-item\">Now Playing</a>
-                    <a href=\"./coming_soon.php\" class=\"list-group-item\">Coming Soon</a>
+            <div class="col-md-3">
+                <p class="lead">Something new to watch </p>
+                <div class="list-group">
+                    <a href="./opening.php" class="list-group-item">Opening This Week</a>
+                    <a href="./now_playing.php" class="list-group-item">Now Playing</a>
+                    <a href="./coming_soon.php" class="list-group-item">Coming Soon</a>
                 </div>
             </div>
         
-            <div class=\"col-md-9\">
-                <div class=\"row\">";
+            <div class="col-md-9">
+                <div class="row">
                 
-                    
+                    <?php
                     $link = mysqli_connect("localhost","root","Asavari2");
                     if (!$link)
                         {
@@ -157,26 +152,60 @@ echo"
                             echo $output; 
                             exit();
                         }
-                    $languages = mysqli_query($link,'select language from movies group by language having count(*)>5;');
-                    if (!$languages)
+                    $uid = $_SESSION['uid'];
+                    //print $uid;
+                    $reco_query1 = "select * from movies where language like 'tamil' limit 5;";
+                    $reco_query2 = "select * from movies where language like 'hindi' limit 5;";
+                    echo $reco_query1;
+                    echo $reco_query2;
+                    $result1 =  mysqli_query($link,$reco_query1);
+                    $result2 =  mysqli_query($link,$reco_query2);
+                    if (!$result1)
                         {
-                            echo "Could not connect to movies to obtain languages";
+                            echo "Error result 2";
                             exit();
                         }
-                    while ($row = mysqli_fetch_array($languages))
+                    if (!$result2)
+                        {
+                            echo "Error result1";
+                            exit();
+                        }
+                    echo "<div class=\"row\">
+                        <h2> Based on favorite actor </h2>";  
+                    while ($row = mysqli_fetch_array($result1))
                     {
-                    $curlanguage = $row['language'];
-                    echo "<h2>$curlanguage</h2>
-                            <div class=\"row\">";
-                    $languagemoviesquery = "select * from movies where language='$curlanguage' order by rating desc limit 3;";
-                    //echo $languagemoviesquery;
-                    $languagemovies = mysqli_query($link,$languagemoviesquery);
-                    while ($langrow = mysqli_fetch_array($languagemovies))
+                    $title = $row['name'];  
+                    $description = $row['summary'];
+                    $image = $row['posterlink'];
+                    $rating = $row['rating'];
+                    echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
+                        <div class=\"thumbnail\">
+                            <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
+                            <div class=\"caption\">
+                                <h4><a href=\"./movie.php?title=$title \">$title</a>
+                                </h4>
+                                <div class=\"ratings\">
+                                <p class=\"pull-left\">Rating : $rating/10.0</p>
+                                </br>
+                                </div> 
+                                <p class=\"pull-left\">$description</p>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>";
+                    }
+                    
+                    echo "</div>
+                        <div class=\"row\">
+                        <h2> Based on favorite Genre </h2>"; 
+                    while ($row = mysqli_fetch_array($result2))
                     {
-                    $title = $langrow['name'];  
-                    $description = $langrow['summary'];
-                    $image = $langrow['posterlink'];
-                    $rating = $langrow['rating'];
+                    $title = $row['name'];  
+                    $description = $row['summary'];
+                    $image = $row['posterlink'];
+                    $rating = $row['rating'];
                     echo "<div class=\"col-sm-4 col-lg-4 col-md-4\">
                         <div class=\"thumbnail\">
                             <img style=\"max-height:300px;max-width:250px;min-height:300px;min-width:250px\" src=\"$image\" alt=\"\">
@@ -196,25 +225,13 @@ echo"
                     </div>";
                     }
                     echo "</div>";
-                    }
+                    ?>
                     
                     
-                echo "    
                 </div>
             </div>
-   
+    <!-- /.container -->
 
-    </div>
-    </div>";
-}
-
-//if the user is not logged in
-else
-{
-    
-}
-?>
-    
     <div class="container">
 
         <hr>
