@@ -133,23 +133,11 @@ h3{
             </div>
         </div>
         
-        <?php
-        echo "<form method=\"POST\" action=\"addtowishlistutil.php?uid=$uid&mid=$mid\">"; 
-        ?>
+        <div class = "row">
             <div class="form-group">
-            
-            <div class = "row">
-                    <input type="text" class="form-control" name="wishlist" placeholder="List Name" />         
+                <input type="text" class="form-control" name="wishlist" placeholder="List Name" />        
             </div>
-            
-            <div class="row">
-                <div style="float:left" class = "col-md-3">
-                    <input type="submit" name="submit" style="margin-left:10px"  class="btn btn-default btn-success" />
-                </div>
-            </div>
-
-            </div>
-        </form>
+        </div>
         
         
         <div class = "col-md-10">

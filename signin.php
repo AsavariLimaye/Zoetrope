@@ -157,7 +157,7 @@ form.login a:hover
                 <p class="form-title">
                     Welcome to Zoetrope</p>
                 <form class="login" method="POST" action="connectivity.php">
-                <input type="text" name="username" placeholder="Username" />
+                <input type="text" name="username" placeholder="email" />
                 <input type="password" name="password" placeholder="Password" />
                 <input name="submit" type="submit" value="Log In" class="btn btn-success btn-sm" />
                

@@ -1,6 +1,5 @@
 <?php
 
-
 $servername = "localhost";
 $username = "root";
 $password = "Asavari2";
@@ -11,20 +10,24 @@ if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-
+echo $_POST['submit'];
+echo $_POST['password'];
+echo $_POST['username'];
 if (isset($_POST['submit']))
 {
- session_start();
+session_start();
 if (!empty($_POST['username']))
     {
-        $result =  mysqli_query($con,"select * from user where email = '$_POST[username]' AND lastName = '$_POST[password]'") or die ();
-        //echo $_POST['username'];
-        //echo $_POST['password'];
+        echo "select * from users where email = '$_POST[username]' AND secondname = '$_POST[password]';";
+        $result =  mysqli_query($con,"select * from users where email = '$_POST[username]' AND secondname = '$_POST[password]';");
+        echo $_POST['username'];
+        echo $_POST['password'];
        $row = mysqli_fetch_array($result);
        
-        if (!empty($row['email']) AND !empty($row['lastName']))
+        if (!empty($row['email']) AND !empty($row['secondname']))
         {
-            $_SESSION['username'] = $row['lastName'];
+            $_SESSION['username'] = $row['email'];
+            $_SESSION['uid']= $row['uid'];
             //echo "Successfully Logged in :D";
             header("Location: index.php");
             exit;

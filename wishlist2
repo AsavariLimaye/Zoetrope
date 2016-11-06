@@ -38,8 +38,7 @@ h3{
 <body>
 
     <?php
-    session_start();
-    if ($_GET['mid']!=null && isset($_SESSION['uid']))
+    if (_GET["mid"]!=null)
     {
     $link = mysqli_connect("localhost","root","Asavari2");
                     if (!$link)
@@ -55,9 +54,8 @@ h3{
                             exit();
                         }
                         
-    $mid = $_GET['mid'];
-    $uid = $_SESSION['uid'];
-    $query = 'select * from mwishlist where uid ='.$uid.';';
+    $mid = _GET["mid"];
+    $query = 'select * from mwishlist where mid ='.$mid.';';
     echo $query;
     $result = mysqli_query($link,$query);
     if (!$result)
@@ -65,6 +63,7 @@ h3{
         echo "Could not connect to mwishlist";
         exit();
         }
+    $row = mysqli_fetch_array($result);
     }
     
     ?>
@@ -133,23 +132,11 @@ h3{
             </div>
         </div>
         
-        <?php
-        echo "<form method=\"POST\" action=\"addtowishlistutil.php?uid=$uid&mid=$mid\">"; 
-        ?>
+        <div class = "row">
             <div class="form-group">
-            
-            <div class = "row">
-                    <input type="text" class="form-control" name="wishlist" placeholder="List Name" />         
+                <input type="text" class="form-control" name="wishlist" placeholder="List Name" />        
             </div>
-            
-            <div class="row">
-                <div style="float:left" class = "col-md-3">
-                    <input type="submit" name="submit" style="margin-left:10px"  class="btn btn-default btn-success" />
-                </div>
-            </div>
-
-            </div>
-        </form>
+        </div>
         
         
         <div class = "col-md-10">
@@ -157,15 +144,10 @@ h3{
                             <h3> Your Current Wishlists </h3>
                             <table class="table">
                                 <tbody>
-                                <?php
-                                while($row = mysqli_fetch_array($result))
-                                {
-                                $listname =   $row['listname'];                                 
-                                echo "<tr>
-                                    <td><h4>$listname</td>
-                                    </tr>";
-                                }
-                                ?>
+                                
+                                    <tr>
+                                    <td><h4>Cloudy with a Chance of Meatballs</h4></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </ul>
