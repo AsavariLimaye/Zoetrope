@@ -37,6 +37,27 @@ h3{
 
 <body>
 
+    <?php
+    if (isset(_GET["mid"]))
+    {
+    $link = mysqli_connect("localhost","root","Asavari2");
+                    if (!$link)
+                        {
+                            $output = 'Unable to connect to the data base server.';
+                            echo $output;
+                            exit();
+                        }
+                    if (!mysqli_select_db($link, 'zoetrope')) 
+                        {
+                            $output = 'Unable to locate the zoetrope database.'; 
+                            echo $output; 
+                            exit();
+                        }
+                        
+    $mid = _GET["mid"];
+    }
+    
+    ?>
     <!-- Navigation -->
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -106,61 +127,51 @@ h3{
     </div>
 
     <div class="container">
+    <div class="form-group">
+    <?php
+    echo "<form action=\"addratereview.php\" method=\"POST\">";
+    ?>
+    <div class="row">
+    <div class="col-md-3">
+    
+            <label for="sel1">Select rating for the movie:</label>
+            <select class="form-control" id="sel1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            </select>
+    </div>
+    </div>
+            
+    <div class="row">
+    <div class="col-md-8">
+                <label for="comment">Justify your rating by writing a review here : </label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div style="float:left" class = "col-md-3">
+        <button type="button" style="margin-left:10px" class="btn btn-danger ">Cancel </button>
+        <input type="submit" style="margin-left:10px"  class="btn btn-default btn-success" />
+    </div>
+    </div>
+    
+    </form>
+    </div>
+    </div>          
 
-        <div class="row">
+        
 
-            <div class="col-md-3">
-
-                 <div class="form-group">
-  <label for="sel1">Select rating for the movie:</label>
-  <select class="form-control" id="sel1">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-    <option>6</option>
-    <option>7</option>
-    <option>8</option>
-    <option>9</option>
-    <option>10</option>
-  </select>
- 
-</div>
-
-
-            </div>
-         </div>
-     </div>          
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-8">
-
-                 <form >
-                     <div class="form-group">
-                         <label for="comment">Justify your rating by writing a review here : </label>
-                         <textarea class="form-control" rows="5" id="comment"></textarea>
-                         </div>
-  
-                         
-                        
-                </form> 
-            </div>
-
-        </div>
-
-    </div>     
-
-     </div>
-            <div style="float:right" class = "col-md-3">
-                <button type="button" style="margin-left:-230px;margin-right:50px" class="btn btn-danger ">Cancel</button>
-            </div>
-            <div style="float:right" class = "col-md-3">
-                <button type="button" style="margin-left:10px"  class="btn btn-default btn-success">Submit</button>
-            </div>    
+     
+              
     
     <script src="js/jquery.js"></script>
 

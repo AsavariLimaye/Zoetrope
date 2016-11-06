@@ -34,6 +34,56 @@
 </head>
 
 <body>
+    <?php
+    $titleToSearch =  htmlspecialchars($_GET['title']);
+    $link = mysqli_connect("localhost","root","Asavari2");
+                    if (!$link)
+                        {
+                            $output = 'Unable to connect to the data base server.';
+                            echo $output;
+                            exit();
+                        }
+                    if (!mysqli_select_db($link, 'zoetrope')) 
+                        {
+                            $output = 'Unable to locate the zoetrope database.'; 
+                            echo $output; 
+                            exit();
+                        }
+                    $query = 'select * from movies where name like \''.$titleToSearch.'\';';
+                    //echo $query;
+                    $result = mysqli_query($link,$query);
+                    if (!$result)
+                        {
+                            echo "Could not connect to movies";
+                            exit();
+                        }
+    $row = mysqli_fetch_array($result);
+    $mid = $row['mid'];
+    $title = $row['name'];  
+    $description = $row['summary'];
+    $image = $row['posterlink'];
+    $rating = $row['rating'];
+    $rdate = $row['rdate'];
+    $producer = $row['producer'];
+    $director = $row['director'];
+    $composer = $row['composer'];
+    $language = $row['language'];
+    $runtime = $row['runtime'];
+    $genre = $row['genre'];
+    
+    $reviewquery = 'select review from mreview where mid = '.$mid.';';
+    //echo $reviewquery;
+    $reviewresult =  mysqli_query($link,$reviewquery);
+    if (!$reviewresult)
+                        {
+                            echo "Could not connect to movies reviews";
+                            exit();
+                        }
+     $castquery = 'select actors.name from actors,mcast where mcast.pid=actors.pid and mcast.mid='.$mid.';';
+     //echo $castquery;
+     $castresult = mysqli_query($link,$castquery);
+     ?>
+
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -144,7 +194,7 @@
             if (isset($_SESSION['username'])){
             echo "
             <div style=\"float:right\" class = \"col-md-3\">
-                <button type=\"button\" style=\"float:right\" onclick=\"ratebox_show()\" class=\"btn btn-default btn-success\">Rate this Movie</button>
+                <input type=\"button\" style=\"float:right\" onclick=\"location.href='http://localhost/ratereview?mid=$mid';\" class=\"btn btn-default btn-success\" value=\"Rate this Movie\" />
             </div>
             <div style=\"float:right\" class = \"col-md-3\">
                 <button type=\"button\" style=\"margin-left:280px\"  class=\"btn btn-default btn-success\">Add to WishList</button>
@@ -165,54 +215,8 @@
       </div>
     </div>
     
-    <?php
-    $titleToSearch =  htmlspecialchars($_GET['title']);
-    $link = mysqli_connect("localhost","root","Asavari2");
-                    if (!$link)
-                        {
-                            $output = 'Unable to connect to the data base server.';
-                            echo $output;
-                            exit();
-                        }
-                    if (!mysqli_select_db($link, 'zoetrope')) 
-                        {
-                            $output = 'Unable to locate the zoetrope database.'; 
-                            echo $output; 
-                            exit();
-                        }
-                    $query = 'select * from movies where name like \''.$titleToSearch.'\';';
-                    //echo $query;
-                    $result = mysqli_query($link,$query);
-                    if (!$result)
-                        {
-                            echo "Could not connect to movies";
-                            exit();
-                        }
-    $row = mysqli_fetch_array($result);
-    $mid = $row['mid'];
-    $title = $row['name'];  
-    $description = $row['summary'];
-    $image = $row['posterlink'];
-    $rating = $row['rating'];
-    $rdate = $row['rdate'];
-    $producer = $row['producer'];
-    $director = $row['director'];
-    $composer = $row['composer'];
-    $language = $row['language'];
-    $runtime = $row['runtime'];
-    $genre = $row['genre'];
     
-    $reviewquery = 'select review from mreview where mid = '.$mid.';';
-    //echo $reviewquery;
-    $reviewresult =  mysqli_query($link,$reviewquery);
-    if (!$reviewresult)
-                        {
-                            echo "Could not connect to movies reviews";
-                            exit();
-                        }
-     $castquery = 'select actors.name from actors,mcast where mcast.pid=actors.pid and mcast.mid='.$mid.';';
-     //echo $castquery;
-     $castresult = mysqli_query($link,$castquery);
+     <?php
      echo" <div class=\"container\">   <!--Container for the left side list and the poster-->
         <div class=\"row\">
 
