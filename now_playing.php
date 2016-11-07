@@ -187,7 +187,7 @@
                         <a href="./movies.php">Movies</a>
                     </li>
                     <li>
-                        <a href="./tvshow.php">TV Shows</a>
+                        <a href="./tvshows.php">TV Shows</a>
                     </li>
                     <li>
                         <a href="./lists.php">Lists</a>  

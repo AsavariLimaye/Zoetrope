@@ -10,7 +10,7 @@
     } catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
-    
+    /*
     $handle = fopen("English Movies.csv", "r") or die("Unable to open file!");
     for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
         {
@@ -19,7 +19,6 @@
            print $sql;
             $dbh->exec($sql);
     }
-    
     $handle = fopen("Hindi Movies.csv", "r") or die("Unable to open file!");
     for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
         {
@@ -68,6 +67,81 @@
         {
             $sql = "INSERT into Actors (name,description,link,place,dob) values (\"" . $data[0] . "\",\"" .$data[1] . "\",\"" .$data[2]. "\",\"" . $data[3]. "\",\"" . $data[4]."\");"; 
             print $sql;
-            $dbh->exec($sql) or die("actor");
+            $dbh->exec($sql); //or die("actor");
     }
+    
+    $handle = fopen("Hindi Actors.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into Actors (name,description,link,place,dob) values (\"" . $data[0] . "\",\"" .$data[1] . "\",\"" .$data[2]. "\",\"" . $data[3]. "\",\"" . $data[4]."\");"; 
+            
+            //$sql = "INSERT into Actors (name,description,link,place,dob) values (\"" . $data[0] . "\",\"" .$data[1] . "\",\"" .$data[2]. "\",\"" . $data[3]. "\",str_to_date('" . $data[4]."','%d-%m-%Y'));"; 
+            print $sql;
+            $dbh->exec($sql);
+    }
+    
+    $handle = fopen("South Actors.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into Actors (name,description,link,place,dob) values (\"" . $data[0] . "\",\"" .$data[1] . "\",\"" .$data[2]. "\",\"" . $data[3]. "\",\"" . $data[4]."\");"; 
+            print $sql;
+            $dbh->exec($sql) ;
+    }
+    
+    $handle = fopen("Cast.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into mcast values (" . $data[0] . "," .$data[1].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into mcast values (" . $data[0] . "," .$data[2].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into mcast values (" . $data[0] . "," .$data[3].");"; 
+            $dbh->exec($sql) ;
+    }
+    
+    $handle = fopen("TV Cast.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into tvcast values (" . $data[0] . "," .$data[1].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into tvcast values (" . $data[0] . "," .$data[2].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into tvcast values (" . $data[0] . "," .$data[3].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into tvcast values (" . $data[0] . "," .$data[4].");"; 
+            $dbh->exec($sql) ;
+            $sql = "INSERT into tvcast values (" . $data[0] . "," .$data[5].");"; 
+            $dbh->exec($sql) ;
+    }
+    
+    $handle = fopen("Movie Reviews.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into mreview values (" . $data[0] . "," .$data[1] . ",\"" .$data[2]. "\");"; 
+            print $sql;
+            $dbh->exec($sql) ;
+    }
+    $handle = fopen("Movie Ratings.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into movierating values (" . $data[0] . "," .$data[1] . "," .$data[2]. ");"; 
+            print $sql;
+            $dbh->exec($sql) ;
+    }
+    
+    $handle = fopen("TV Review.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into tvreview values (" . $data[0] . "," .$data[1] . ",\"" .$data[2]. "\");"; 
+            print $sql;
+            $dbh->exec($sql) ;
+    }
+    $handle = fopen("TV Rating.csv", "r") or die("Unable to open file!");
+    for($i =1;($data = fgetcsv($handle, 10000, ",")) !== FALSE; $i++)
+        {
+            $sql = "INSERT into tvshowrating values (" . $data[0] . "," .$data[1] . "," .$data[2]. ");"; 
+            print $sql;
+            $dbh->exec($sql) ;
+    }
+    */
 ?>

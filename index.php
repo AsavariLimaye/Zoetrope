@@ -94,7 +94,7 @@
 
     <div class="container">
     <div class="row">    
-            <div class="col-lg-8 col-xs-offset-3">
+            <div class="col-md-8 col-xs-offset-3">
             
                 <div  class="input-group-btn input-group-lg search-panel">
                      <?php echo "<form class=\"form-inline\" method=\"POST\" action=\"search.php?type=$type\">"; ?>

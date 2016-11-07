@@ -50,7 +50,7 @@
                             exit();
                         }
                     $query = 'select * from tvshows where name like \'%'.$titleToSearch.'%\';';
-                    echo $query;
+                    //echo $query;
                     $result = mysqli_query($link,$query);
                     if (!$result)
                         {
@@ -70,7 +70,7 @@
     $genre = $row['genre'];
     
     $reviewquery = 'select review from tvreview where tvid = '.$tvid.';';
-    echo $reviewquery;
+    //echo $reviewquery;
     $reviewresult =  mysqli_query($link,$reviewquery);
     if (!$reviewresult)
                         {
@@ -137,32 +137,7 @@
         <!-- /.container -->
     </nav>
 
-     <div class="container">
-    <div class="row">    
 
-        <div class="col-md-8 col-xs-offset-3">
-            <div class="input-group">
-                <div  class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#contains">All</a></li>
-                      <li><a href="#its_equal">Movies</a></li>
-                      <li><a href="#greather_than">TV Shows</a></li>
-                    </ul>
-                </div>
-                <form method="POST" action="search.php">
-                    <input type="hidden" name="search_param" value="all" id="search_param">         
-                    <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                    <span class="input-group-btn">
-                        <input name="searchbtn" class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-search"></span>
-                    </span>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
     <!-- Page Content -->
@@ -227,7 +202,7 @@
             </div>
 
             
-            <div class=\"col-xs-3 col-md-3\"><img class=\"img-responsive\" style=\"max-height:400px; max-width:300px\" src=\"$image\"/></div>
+            <div class=\"col-xs-3 col-md-3\"><img class=\"img-responsive\" style=\"max-height:400px; max-width:280px\" src=\"$image\"/></div>
             
             
             <div class=\"col-xs-12 col-md-7\">

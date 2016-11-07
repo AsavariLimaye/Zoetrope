@@ -42,4 +42,7 @@ select * from movies where genre = (select genre from genrecount where count=@ma
 select genre,count(*) as c from movies,movierating where uid=1 and movies.mid=movierating.mid group by genre order by c limit 1;
 
 
-select * from movies where genre = (select genre from movies,movierating where uid=1 and movies.mid=movierating.mid and rating = (select max(d.rating) from movierating as d where uid=1)) order by rating desc limit 5;  
+select * from movies where genre = (select genre from movies,movierating where uid=1 and movies.mid=movierating.mid and rating = (select max(d.rating) from movierating as d where uid=1)) order by rating desc limit 5;
+
+
+update tvshows set startdate = ()  

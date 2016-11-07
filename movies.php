@@ -89,32 +89,7 @@
         </div>
     </nav>
 
-    <div class="container">
-    <div class="row">    
-
-        <div class="col-md-8 col-xs-offset-3">
-            <div class="input-group">
-                <div  class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#contains">All</a></li>
-                      <li><a href="#its_equal">Movies</a></li>
-                      <li><a href="#greather_than">TV Shows</a></li>
-                    </ul>
-                </div>
-                <form method="POST" action="search.php">
-                    <input type="hidden" name="search_param" value="all" id="search_param">         
-                    <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                    <span class="input-group-btn">
-                        <input name="searchbtn" class="btn btn-default" type="submit"/><span class="glyphicon glyphicon-search"></span>
-                    </span>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+   
   
   </div class="container">
   <div class="row">
@@ -245,7 +220,7 @@ else
                     //print $uid;
                     
                     $reco_query2 = "select * from movies,mcast where movies.mid=mcast.mid and mcast.pid=(select pid from favactor where uid=$uid order by points desc limit 1);";
-                    $reco_query1 = "select * from movies mo where genre = (select genre from movies as m1,movierating as m2 where m2.uid=1 and m1.mid=m2.mid and m2.rating = (select max(d.rating) from  movierating as d where d.uid=1)) order by mo.rating desc limit 5;  ";
+                    $reco_query1 = "select * from movies mo where genre = (select genre from movies as m1,movierating as m2 where m2.uid=$uid and m1.mid=m2.mid and m2.rating = (select max(d.rating) from  movierating as d where d.uid=$uid)) order by mo.rating desc limit 5;  ";
                     
                     echo $reco_query1;
                     echo $reco_query2;

@@ -82,7 +82,7 @@ $link = mysqli_connect("localhost","root","Asavari2");
                         <a href="./movies.php">Movies</a>
                     </li>
                     <li>
-                        <a href="./tvshow.php">TV Shows</a>
+                        <a href="./tvshows.php">TV Shows</a>
                     </li>
                     <li>
                         <a href="./lists.php">Lists</a>  
@@ -117,30 +117,7 @@ $link = mysqli_connect("localhost","root","Asavari2");
         <!-- /.container -->
     </nav>
 
-   <div class="container">
-    <div class="row">    
 
-        <div class="col-md-8 col-xs-offset-3">
-            <div style="margin-bottom:25px" class="input-group">
-                <div  class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#contains">All</a></li>
-                      <li><a href="#its_equal">Movies</a></li>
-                      <li><a href="#greather_than">TV Shows</a></li>
-                    </ul>
-                </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">         
-                <input type="text" class="form-control" name="x" placeholder="Find Movies,Shows & More ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -168,7 +145,7 @@ while ($row = mysqli_fetch_array($result))
  $rating = $row['rating'];
   $posterlink = $row['posterlink'];
   echo "<div class = \"col-md-12\" >
-      <a href = \"#\" class = \"thumbnail\">
+      <a href = \"./tvshow.php?title=$title\" class = \"thumbnail\">
          <img style=\"margin-left:10px;margin-right:5px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
       <p style=\"max-width:10px\">$name<br/>$language</br> Estimated Rating : $rating/10 <p>
@@ -193,7 +170,7 @@ while ($row = mysqli_fetch_array($result1))
  $seasons = $row['seasons'];
  $posterlink = $row['posterlink'];
  echo " <div class = \"col-md-2 col-md-offset-2\" >
-      <a href = \"#\" class = \"thumbnail\">
+      <a href = \"./tvshow.php?title=$name\" class = \"thumbnail\">
          <img style=\"max-height:210px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
       <p style=\"max-width:200px\">$name</br>Seasons:$seasons</br>$genre</p>
