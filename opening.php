@@ -43,7 +43,7 @@ $link = mysqli_connect("localhost","root","Asavari2");
          echo $output; 
          exit();
         }
-         $query = 'select * from movies where rdate between  curdate() and date_add(curdate(),interval 7 day) limit 6;';
+         $query = 'select * from movies where rdate between  curdate() and date_add(curdate(),interval 7 day) limit 3;';
          //echo $query;
          $result = mysqli_query($link,$query);
          if (!$result)
@@ -51,7 +51,7 @@ $link = mysqli_connect("localhost","root","Asavari2");
             echo "Could not connect to movies";
             exit();
             }
-        $query1 = 'select * from tvshows where startdate between curdate() and date_add(curdate(),interval 7 day) limit 6;';
+        $query1 = 'select * from tvshows where startdate between curdate() and date_add(curdate(),interval 7 day) limit 3;';
         //echo $query;
         $result1 = mysqli_query($link,$query1);
         if (!$result1)
@@ -144,9 +144,9 @@ while ($row = mysqli_fetch_array($result))
  $language = $row['language'];
  $rating = $row['rating'];
   $posterlink = $row['posterlink'];
-  echo "<div class = \"col-md-12\" >
+  echo "<div class = \"col-md-3\" >
       <a href = \"./tvshow.php?title=$title\" class = \"thumbnail\">
-         <img style=\"margin-left:10px;margin-right:5px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
+         <img style=\"margin-left:10px;margin-right:5px; max-height:180px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
       <p style=\"max-width:10px\">$name<br/>$language</br> Estimated Rating : $rating/10 <p>
       
@@ -169,7 +169,7 @@ while ($row = mysqli_fetch_array($result1))
  $genre = $row['genre'];
  $seasons = $row['seasons'];
  $posterlink = $row['posterlink'];
- echo " <div class = \"col-md-2 col-md-offset-2\" >
+ echo " <div class = \"col-md-3 col-md-offset-2\" >
       <a href = \"./tvshow.php?title=$name\" class = \"thumbnail\">
          <img style=\"max-height:210px; \"src = \"$posterlink\" alt = \"Generic placeholder thumbnail\">
       </a>
