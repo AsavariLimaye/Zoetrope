@@ -179,7 +179,8 @@
                 <div class="row">
                 <h2> Latest Movies </h2>
                     <?php
-                    $link = mysqli_connect("localhost","root","Asavari2");
+                    error_reporting(0);
+                    $link = mysqli_connect("localhost","root","password");
                     if (!$link)
                         {
                             $output = 'Unable to connect to the data base server.';

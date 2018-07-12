@@ -119,7 +119,7 @@ echo"
                 <div class=\"row\">";
                 
                     
-                    $link = mysqli_connect("localhost","root","Asavari2");
+                    $link = mysqli_connect("localhost","root","password");
                     if (!$link)
                         {
                             $output = 'Unable to connect to the data base server.';
@@ -203,7 +203,7 @@ else
                 <div class=\"row\">";
                 
                     
-                    $link = mysqli_connect("localhost","root","Asavari2");
+                    $link = mysqli_connect("localhost","root","password");
                     if (!$link)
                         {
                             $output = 'Unable to connect to the data base server.';

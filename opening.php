@@ -30,7 +30,7 @@
 
 <body>
 <?php
-$link = mysqli_connect("localhost","root","Asavari2");
+$link = mysqli_connect("localhost","root","password");
     if (!$link)
         {
         $output = 'Unable to connect to the data base server.';

@@ -3,7 +3,7 @@
 //echo $_POST['submit'];
 $servername = "localhost";
 $username = "root";
-$password = "Asavari2";
+$password = "password";
 $database = "zoetrope";
 
 $con = mysqli_connect($servername,$username,$password,$database);
