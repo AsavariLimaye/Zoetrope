@@ -2,11 +2,12 @@
 # Zeotrope
 A web database of Movies and TV Shows in many languages where you can write reviews, rate, and view lists of top movies and tv shows.
 
-Front End: HTML, CSS, Bootstrap
-Back End: PHP, MySQL
+#### Front End
+HTML, CSS, Bootstrap
+#### Back End
+PHP, MySQL
 
 ## Instructions
-
 ### 1. Installing WAMP
 Install WAMP (Windows Apache MySQL PHP) Server http://www.wampserver.com/en/
 Make sure the WAMP icon is in the notification area of windows, and that it is green and ready to use.
